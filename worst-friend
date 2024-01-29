@@ -52,7 +52,7 @@ def greeting(sentence):
 
 # Generating response
 def response(user_response):
-    robo_response=''
+    worst_response=''
     sent_tokens.append(user_response)
     TfidfVec = TfidfVectorizer(tokenizer=LemNormalize, stop_words='english')
     tfidf = TfidfVec.fit_transform(sent_tokens)
@@ -62,11 +62,11 @@ def response(user_response):
     flat.sort()
     req_tfidf = flat[-2]
     if(req_tfidf==0):
-        robo_response=robo_response+"What did you just say? -.- "
-        return robo_response
+        worst_response=robo_response+"What did you just say? -.- "
+        return worst_response
     else:
-        robo_response = robo_response+sent_tokens[idx]
-        return robo_response
+        worst_response = worst_response+sent_tokens[idx]
+        return worst_response
 
 
 flag=True
@@ -80,9 +80,9 @@ while(flag==True):
             print("Ok.")
         else:
             if(greeting(user_response)!=None):
-                print("badRobot: "+greeting(user_response))
+                print("worst friend: "+greeting(user_response))
             else:
-                print("badRobot: "+response(user_response))
+                print("worst friend: "+response(user_response))
                 sent_tokens.remove(user_response)
     else:
         flag=False
