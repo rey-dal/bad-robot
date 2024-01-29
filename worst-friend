@@ -62,7 +62,7 @@ def response(user_response):
     flat.sort()
     req_tfidf = flat[-2]
     if(req_tfidf==0):
-        worst_response=robo_response+"What did you just say? -.- "
+        worst_response=worst_response+"What did you just say? -.- "
         return worst_response
     else:
         worst_response = worst_response+sent_tokens[idx]
