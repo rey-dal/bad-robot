@@ -1,1 +1,1 @@
-A basic nlp chatbot giving bad advices.
+The worst (but simple) python nlp chatbot.
