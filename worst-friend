@@ -1,4 +1,5 @@
 #Worst Friend
+#pip3 install -U scikit-learn
 
 #libraries
 import io
@@ -6,7 +7,7 @@ import random
 import string # to process standard python strings
 import warnings
 
-#import numpy as np
+import numpy as np
 from sklearn.feature_extraction.text import TfidfVectorizer
 from sklearn.metrics.pairwise import cosine_similarity
 
@@ -18,16 +19,16 @@ from nltk.stem import WordNetLemmatizer
 nltk.download('popular', quiet=True) # for downloading packages
 
 
-nltk.download('punkt') # first-time use only
-nltk.download('wordnet') # first-time use only
+#nltk.download('punkt') # download nltk
+#nltk.download('wordnet') # download nltk
 
 
 #Reading in the corpus
-with open('advices.txt','r', encoding='utf8', errors ='ignore') as fin:
+with open('worst_advices.txt','r', encoding='utf8', errors ='ignore') as fin:
     raw = fin.read().lower()
 
 #tokenisation
-sent_tokens = nltk.sent_tokenize(raw) # converts to list of sentences 
+sent_tokens = nltk.sent_tokenize(raw) # converts to list of sentences
 word_tokens = nltk.word_tokenize(raw) # converts to list of words
 
 # Preprocessing
@@ -41,7 +42,7 @@ def LemNormalize(text):
 
 # Keyword Matching
 GREETING_INPUTS = ("hello", "hi", "greetings", "sup", "what's up","hey","yo","wassup","wazzup")
-GREETING_RESPONSES = ["...", "Hi *****", "-.-", "What do you want?", "Leave me alone", "You know i don't want to talk to you", "Hi bestie, why are you bothering me? "]
+GREETING_RESPONSES = ["...", "Yeah", "Hi worst person on the planet", "-.-", "What do you want?", "Leave me alone", "You know i don't want to talk to you", "Hi bestie, why are you bothering me? "]
 
 def greeting(sentence):
     """If input is a greeting, return a greeting """
@@ -70,13 +71,16 @@ def response(user_response):
 
 
 flag=True
-print("I am your worst friend and I give bad advice.")
+print("I am your worst friend and I give bad advice, if i want.")
 while(flag==True):
     user_response = input()
     user_response=user_response.lower()
     if(user_response!='bye'):
         if(user_response=='thanks' or user_response=='thank you' ):
             flag=False
+            print("Ok.")
+        elif(user_response=='yes' or user_response=='no' ):
+            flag = False
             print("Ok.")
         else:
             if(greeting(user_response)!=None):
@@ -86,4 +90,4 @@ while(flag==True):
                 sent_tokens.remove(user_response)
     else:
         flag=False
-        print("Yeah, whatever. Don't talk to me.") 
+        print("Yeah, whatever. Don't talk to me.")
