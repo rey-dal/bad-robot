@@ -51,7 +51,7 @@ def greeting(sentence):
             return random.choice(GREETING_RESPONSES)
 
 
-# Generating response
+# Generating response with cosine similarity
 def response(user_response):
     worst_response=''
     sent_tokens.append(user_response)
@@ -63,9 +63,10 @@ def response(user_response):
     flat.sort()
     req_tfidf = flat[-2]
     if(req_tfidf==0):
-        worst_response=worst_response+"What did you just say? -.- "
+        worst_response=worst_response+"..."
         return worst_response
     else:
+        next_sentence = sent_tokens[idx].split('.')[-1].strip()
         worst_response = worst_response+sent_tokens[idx]
         return worst_response
 
